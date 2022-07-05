@@ -9,30 +9,47 @@ class SpecificStock extends Component{
 
     constructor(props){
         super();
-        this.state = {name: props.router.location.pathname.split("/")[2],
+        this.state = {
+          name: props.router.location.pathname.split("/")[2],
             data: [{"Time": "0", //Todo: Make Dynamic data
-            "stock": 14,
+            "USD": 14,
             },
             {"Time": "1",
       
-            "stock": 11,
+            "USD": 11,
             },
             {"Time": "2",
       
-            "stock": 16,
+            "USD": 16,
             },
             {"Time": "3",
       
-            "stock": 8.5,
+            "USD": 8.5,
             }
-        ]
+        ],
+        average: -1,
         }
        
     }
 
 
   
-       
+      componentDidMount(){
+        if(this.state.average == -1){
+        let sum = 0;
+        this.state.data.forEach(element => {
+          sum += element.USD
+        });
+    
+        let avg = sum / this.state.data.length;
+  
+        this.setState(() => {
+          return {average : avg}
+        })
+      
+   
+      }
+      }
       
 
 
@@ -71,7 +88,7 @@ class SpecificStock extends Component{
     <Card.Text>
       Writes if latest is increasing or decreasing in proportion to the average % wise.
       <h2>
-        + 5% 
+        {(this.state.data[this.state.data.length-1].USD / this.state.average).toFixed(2)} %
       </h2>
     </Card.Text>
     <Card.Link href="#">Card Link</Card.Link>
@@ -105,7 +122,7 @@ class SpecificStock extends Component{
   <YAxis datakey="Price"/>
 <Tooltip />
   <Legend />
-  <Line type="monotone" dataKey="stock" stroke="#8884d8" />
+  <Line type="monotone" dataKey="USD" stroke="#8884d8" />
   
 </LineChart>
 </ResponsiveContainer>
