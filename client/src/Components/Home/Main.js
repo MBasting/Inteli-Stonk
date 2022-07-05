@@ -1,8 +1,9 @@
 import react, {Component} from 'react'
 import {Container, Row, Col, Card} from 'react-bootstrap'
+import withRouter from '../withRouter'
 import Navigation from "../Navigation/Navigation"
 function Main (props){
-    document.body.style.backgroundColor = "#F1E9DA" //Change later to a more dynamic way of setting the main background color.
+    
     return (<Container fluid  ><Row >
         <Navigation  />
     </Row>
@@ -41,4 +42,4 @@ function Main (props){
     </Container>)
 }
 
-export default Main;
+export default withRouter(Main);

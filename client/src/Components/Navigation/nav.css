@@ -6,7 +6,7 @@ background-color: #F2545B;
     background-color: #F1E9DA;
 }
 .secondcolor{
-    background-color: #541388;
+    background-color: #541388 !important;
 }
 
 .messageCard {

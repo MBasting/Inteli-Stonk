@@ -5,7 +5,7 @@ function Navigation(props){
     return (<Navbar variant="light">
     <Container className='m-auto'>
 
-    <Navbar.Brand href="#home"><h3>Inteli-Stonk</h3></Navbar.Brand>
+    <Navbar.Brand href="/"><h3>Inteli-Stonk</h3></Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="me-auto">

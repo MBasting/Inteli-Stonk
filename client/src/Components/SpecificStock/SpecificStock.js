@@ -1,12 +1,15 @@
 import {React,Component} from 'react'
+import withRouter from '../withRouter'
 import {Container, Row, Col, Card, Breadcrumb} from 'react-bootstrap'
 import Navigation from '../Navigation/Navigation'
+import Filter from './Filter'
 import {LineChart, CartesianGrid, XAxis, YAxis, Legend, Line, Tooltip, ResponsiveContainer} from 'recharts'
+import _ from './stock.css'
 class SpecificStock extends Component{
 
-    constructor(){
+    constructor(props){
         super();
-        this.state = {
+        this.state = {name: props.router.location.pathname.split("/")[2],
             data: [{"Time": "0", //Todo: Make Dynamic data
             "stock": 14,
             },
@@ -24,7 +27,16 @@ class SpecificStock extends Component{
             }
         ]
         }
+       
     }
+
+
+  
+       
+      
+
+
+    
     render(){
         return (
             <Container fluid>
@@ -37,17 +49,21 @@ class SpecificStock extends Component{
   <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
  
    
-  <Breadcrumb.Item active>StockName</Breadcrumb.Item>
+  <Breadcrumb.Item active>{this.state.name}</Breadcrumb.Item>
 </Breadcrumb>
                         </Row>
-                        <Row md="5">
+
+                        <Row className='title' md="5">
                             <h1>
-                                Stock Name
+                                {this.state.name}
                             </h1>
                         </Row>
-                    <Row>
+                        <Row sm="6">
+          <Filter />
+      </Row>
+                    <Row className='data'> 
                         <Col>
-                        <Row>
+                        <Row  >
                         <Card style={{ width: '18rem' }}>
   <Card.Body>
     <Card.Title>Stocks performance</Card.Title>
@@ -63,7 +79,7 @@ class SpecificStock extends Component{
   </Card.Body>
 </Card>
                         </Row>
-                        <Row>
+                        <Row  className='CardPos'>
                         <Card style={{ width: '18rem' }}>
   <Card.Body>
     <Card.Title>Current rank in performance</Card.Title>
@@ -101,4 +117,4 @@ class SpecificStock extends Component{
         
     }
 }
-export default SpecificStock
+export default withRouter(SpecificStock)
