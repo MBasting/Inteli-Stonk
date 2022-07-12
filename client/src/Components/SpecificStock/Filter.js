@@ -2,9 +2,15 @@ import {React, useState} from 'react'
 import {Button, Offcanvas, Form} from 'react-bootstrap'
 function Filter(props) {
     const [show, setShow] = useState(false);
-    const [value, setValue] = useState(0)
     
-    const HandleRange = (e) => setValue(e.target.value)
+
+    const [chartType, setChartType] = useState("")
+    const [start, setStart] = useState("")
+    const [end, setEnd] = useState("")
+
+    const HandleChartType = (e) => setChartType(e.target.value)
+    const HandleStart = (e) => setStart(e.target.value)
+    const HandleEnd = (e) => setEnd(e.target.value)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
   
@@ -21,18 +27,32 @@ function Filter(props) {
           <Offcanvas.Body>
            <Form>
             <Form.Label> Plot Type</Form.Label>
-           <Form.Select aria-label="Default select example">
+           <Form.Select onChange={HandleChartType} aria-label="Default select example">
          <option>What type of plot</option>
          <option value="continuous">Continuous</option>
         <option value="discrete">Discrete</option>
         </Form.Select>
 
+        <Form.Label>From</Form.Label>
+        <Form.Select onChange={HandleStart} size="sm" aria-label="Default select example">
+        <option >Select Start</option>
+          {props.data.map(element => {
+          return  <option value={element.Time}>{element.Time}</option>
+          })}
+        
+      </Form.Select>
 
-        <Form.Label>Time</Form.Label>
-        <Form.Range value={value} onChange={HandleRange}/>
-        <div> {value}</div>
+      <Form.Label >To</Form.Label>
+      <Form.Select onChange={HandleEnd} aria-label="Default select example" size="sm">
+        <option>Select End</option>
+        {props.data.map(element => {
+          return  <option value={element.Time}>{element.Time}</option>
+          })}
+      </Form.Select>
 
-        <Button >
+
+
+        <Button onClick={() => {props.updateChart(chartType)}}>
             Submit
         </Button>
            </Form>
